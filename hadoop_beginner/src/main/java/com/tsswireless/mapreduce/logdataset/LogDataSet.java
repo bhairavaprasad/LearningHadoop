@@ -56,6 +56,17 @@ public class LogDataSet extends Configured implements Tool
 	public static class MultiFileOutput extends MultipleTextOutputFormat<Text, Text>
 	{
 		
+		/*
+		 * When actually writing the data discard the key as it is already in
+		 * the file path
+		 */
+		@Override
+		protected Text generateActualKey(Text key, Text value)
+		{
+			return null;
+		}
+		
+		/* Use the key as part of the path for the final output file */
 		@Override
 		protected String generateFileNameForKeyValue(Text key, Text value, String name)
 		{
